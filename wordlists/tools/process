@@ -1,3 +1,24 @@
-#!/bin/sh
+#!/usr/bin/perl -CS
+# take in a list of words and emit an unsorted uniqued list.
+# previous mentions take priority.
 
-sort -u
+use strict;
+
+# has this word been seen before
+my %seen;
+
+# list of words
+my @list;
+
+while (<STDIN>) {
+  chop;
+  my $word = $_;
+  if ($seen{$word} != 1) {
+    $seen{$word} = 1;
+    push(@list, $word);
+  }
+}
+
+foreach my $word (@list) {
+  print $word . "\n";
+}
